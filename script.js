@@ -1,4 +1,14 @@
-/* globals fetch, FormData */
+/* globals fetch, FormData, btoa, sessionStorage */
+
+// const uuid4 = require('uuid/v4')
+// let credentials = {
+//   username: sessionStorage.getItem('username'),
+//   password: sessionStorage.getItem('password')
+// }
+
+function basicAuthCreds() {
+  return 'Basic ' + btoa('mickyMcK:mickypassword')
+}
 
 function createNewNote() {
   document.querySelector(".submit-button").addEventListener("click", function (event) {
@@ -7,17 +17,32 @@ function createNewNote() {
     let text = document.querySelector('.input-text').value
     fetch('https://notes-api.glitch.me/api/notes', {
       method: 'POST',
-      body: JSON.stringify({ title: title, text: text }),
-      headers: { 'Content-Type': 'application/json' }
+      body: JSON.stringify({ "title": title, "text": text }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': basicAuthCreds()
+      }
     })
       .then(response => response.json())
-      .then(function (input) {
-
-      })
   })
 }
 
 createNewNote()
+
+function retrieveNotes() {
+  fetch('https://notes-api.glitch.me/api/notes', {
+    method: 'GET',
+    headers: {
+      'Authorization': basicAuthCreds()
+    }
+  })
+    .then(response => response.json())
+    .then(JSONresponse => console.log(JSONresponse)
+    )
+}
+
+retrieveNotes()
+
 
 // first thing I need to do is make a form
 
