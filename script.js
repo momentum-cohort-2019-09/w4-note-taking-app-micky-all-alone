@@ -24,6 +24,7 @@ function createNewNote() {
       }
     })
       .then(response => response.json())
+      .then(retrieveNotes())
   })
 }
 
@@ -48,28 +49,32 @@ function retrieveNotes() {
         const text = note.text
         const noteDiv = document.querySelector("#note-body")
 
-        noteDiv.innerHTML =
+        noteDiv.innerHTML +=
           `
-            <div class="title">
-                <h1 class="note-title">
-                  ${title}
-                </h1>
-            </div>
-            <div class="text">
-                <p>
-                  ${text}
-                </p>
-            </div>
-            <div class="note-buttons">
-            <button type="edit" class="edit-button">Edit</button>
-            <button type="delete" class="delete-button">Delete</button>
-            </div>
-          `
+  <div class="note-container">
+    <div class="title">
+      <h1 class="note-title">
+        ${title}
+      </h1>
+    </div>
+    <div class="text">
+      <p>
+        ${text}
+      </p>
+    </div>
+    <div class="note-buttons">
+      <button type="edit" class="edit-button">Edit</button>
+      <button type="delete" class="delete-button">Delete</button>
+    </div>
+  </div>
+`
       }
     })
 }
 
-retrieveNotes()
+// retrieveNotes()
+
+
 
 // cut the note html and paste it as innerText when I grab the data from my API
 
