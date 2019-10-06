@@ -26,7 +26,7 @@ h1 {
     padding-right: 5px;
 }
 
-.note-body {
+#note-body {
     width: 400px;
     background-color: white;
     border: 1px solid #eaeaea;
@@ -49,7 +49,7 @@ h1 {
 
 .delete-button {
     border: none;
-    color: #333333;
+    color: #555555;
     padding-right: 5%;
     text-align: center;
     font-size: 18px;

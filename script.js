@@ -37,22 +37,45 @@ function retrieveNotes() {
     }
   })
     .then(response => response.json())
-    .then(JSONresponse => console.log(JSONresponse)
-    )
+
+    .then(function (JSONresponse) {
+
+      const notesArray = JSONresponse.notes
+
+      for (let note of notesArray) {
+
+        const title = note.title
+        const text = note.text
+        const noteDiv = document.querySelector("#note-body")
+
+        noteDiv.innerHTML =
+          `
+            <div class="title">
+                <h1 class="note-title">
+                  ${title}
+                </h1>
+            </div>
+            <div class="text">
+                <p>
+                  ${text}
+                </p>
+            </div>
+            <div class="note-buttons">
+            <button type="edit" class="edit-button">Edit</button>
+            <button type="delete" class="delete-button">Delete</button>
+            </div>
+          `
+      }
+    })
 }
 
 retrieveNotes()
 
+// cut the note html and paste it as innerText when I grab the data from my API
 
-// first thing I need to do is make a form
+// make a Patch fetch for edit
 
-// once I have a form, I need to make sure I am able to get input from the form
-
-// once I learn that I can receive input from the form, I need to be able to hold that input as a JSON file
-
-// once I have learned how to hold that input as a JSON file, I need a way to access that JSON at a later time
-
-// once I can access that JSON data, I need to be able to display that data as a note
+// make a Delete fetch for delete
 
 
 
