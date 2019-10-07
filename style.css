@@ -26,6 +26,11 @@ h1 {
     padding-right: 5px;
 }
 
+.note-form-container {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
 .note-container {
     width: 400px;
     background-color: white;
@@ -33,26 +38,15 @@ h1 {
     margin: 5px;
 }
 
-.note-buttons {
-    text-align: right;
-    padding-top: 3%;
-    padding-bottom: 2%;
-}
-
 .edit-button {
-    margin-right: 10%;
     border: none;
     color: #555555;
-    padding: 0, 10px;
-    text-align: center;
     font-size: 18px;
 }
 
 .delete-button {
     border: none;
     color: #555555;
-    padding-right: 5%;
-    text-align: center;
     font-size: 18px;
 }
 

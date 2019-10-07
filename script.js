@@ -47,11 +47,12 @@ function retrieveNotes() {
 
         const title = note.title
         const text = note.text
+        const id = note._id
         const noteDiv = document.querySelector("#note-body")
 
         noteDiv.innerHTML +=
           `
-  <div class="note-container">
+  <div class="note-container" id="${id}">
     <div class="title">
       <h1 class="note-title">
         ${title}
@@ -62,25 +63,28 @@ function retrieveNotes() {
         ${text}
       </p>
     </div>
-    <div class="note-buttons">
-      <button type="edit" class="edit-button">Edit</button>
-      <button type="delete" class="delete-button">Delete</button>
-    </div>
+    <button type="edit" class="edit-button">Edit</button>
+    <button type="delete" class="delete-button">Delete</button>
   </div>
 `
       }
     })
 }
 
-// retrieveNotes()
+retrieveNotes()
 
+// function deleteNote () {
+//   document.querySelector(".delete-button").addEventListener("click", function (event) {
+//     event.preventDefault()
+//     let deleteId = this.querySelector(#id)
+//     fetch('https://notes-api.glitch.me/api/notes/${deleteId}', {
+//       method: 'DELETE',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         'Authorization': basicAuthCreds()
+//       }
+//     }
+//   }
+// }
 
-
-// cut the note html and paste it as innerText when I grab the data from my API
-
-// make a Patch fetch for edit
-
-// make a Delete fetch for delete
-
-
-
+// deleteNote()
