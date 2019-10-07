@@ -15,7 +15,7 @@ function createNewNote() {
     event.preventDefault()
     let title = document.querySelector('.input-title').value
     let text = document.querySelector('.input-text').value
-    fetch('https://notes-api.glitch.me/api/notes', {
+    return fetch('https://notes-api.glitch.me/api/notes', {
       method: 'POST',
       body: JSON.stringify({ "title": title, "text": text }),
       headers: {
@@ -24,11 +24,13 @@ function createNewNote() {
       }
     })
       .then(response => response.json())
-      .then(retrieveNotes())
+      .then(JSONresponse => notesArray.push(JSONresponse))
   })
 }
 
 createNewNote()
+
+let notesArray = []
 
 function retrieveNotes() {
   fetch('https://notes-api.glitch.me/api/notes', {
@@ -41,7 +43,8 @@ function retrieveNotes() {
 
     .then(function (JSONresponse) {
 
-      const notesArray = JSONresponse.notes
+      let notesArray = JSONresponse.notes.slice(0)
+      console.log(notesArray)
 
       for (let note of notesArray) {
 
@@ -74,17 +77,18 @@ function retrieveNotes() {
 retrieveNotes()
 
 // function deleteNote () {
+//   console.log("delete note")
 //   document.querySelector(".delete-button").addEventListener("click", function (event) {
 //     event.preventDefault()
-//     let deleteId = this.querySelector(#id)
+//     let deleteId = document.querySelector("#id")
 //     fetch('https://notes-api.glitch.me/api/notes/${deleteId}', {
 //       method: 'DELETE',
 //       headers: {
 //         'Content-Type': 'application/json',
 //         'Authorization': basicAuthCreds()
 //       }
-//     }
-//   }
+//     })
+//   })
 // }
 
 // deleteNote()
