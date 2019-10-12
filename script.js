@@ -33,19 +33,22 @@ function runNotesApp() {
   }
 
   function renderNotes() {
+    const noteDiv = document.querySelector("#note-body")
+
+    noteDiv.innerHTML = ''
+
+    console.log(notesArray)
 
     for (let note of notesArray) {
 
       const title = note.title
       const text = note.text
       const id = note._id
-      const noteDiv = document.querySelector("#note-body")
-
-      noteDiv.innerHTML = ''
+      const updated = note.updated
 
       noteDiv.innerHTML +=
         `
-              <div class="note-container" id="${id}">
+              <div class="note-container" id=${id}>
                 <div class="title">
                   <h1 class="note-title">
                     ${title}
@@ -61,34 +64,7 @@ function runNotesApp() {
               </div>
             `
     }
-  }
-
-  function renderLatestNote() {
-    for (let note of notesArray) {
-
-      const title = note.title
-      const text = note.text
-      const id = note._id
-      const noteDiv = document.querySelector("#note-body")
-
-      noteDiv.innerHTML +=
-        `
-              <div class="note-container" id="${id}">
-                <div class="title">
-                  <h1 class="note-title">
-                    ${title}
-                  </h1>
-                </div>
-                <div class="text">
-                  <p>
-                    ${text}
-                  </p>
-                </div>
-                <button type="edit" class="edit-button">Edit</button>
-                <button type="delete" class="delete-button">Delete</button>
-              </div>
-            `
-    }
+    deleteNote()
   }
 
   function createNewNote() {
@@ -113,24 +89,47 @@ function runNotesApp() {
   }
 
   createNewNote()
+
+  function deleteNote() {
+    for (let note of notesArray) {
+      const id = note._id
+      const noteId = document.getElementById(`${id}`)
+      noteId.querySelector(".delete-button").addEventListener("click", function (event) {
+        event.preventDefault()
+        fetch(`https://notes-api.glitch.me/api/notes/${id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': basicAuthCreds()
+          }
+        })
+        .then(function () {
+          retrieveNotes()
+          renderNotes()
+        })
+      })
+    }
+  }
+
+  // function deleteNote() {
+  //   for (let note of notesArray) {
+  //     document.querySelector('delete-button').addEventListener("click", function (event) {
+  //     // document.querySelector("#" + note.id).querySelector(".delete-button").addEventListener("click", function (event) {
+  //       console.log(`#{id}`)
+  //       event.preventDefault()
+  //       fetch(`https://notes-api.glitch.me/api/notes/${id}`, {
+  //         method: 'DELETE',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //           'Authorization': basicAuthCreds()
+  //         }
+  //       })
+  //       renderNotes()
+  //     })
+  //   }
+  // }
+
 }
 
-  runNotesApp()
+runNotesApp()
 
-
-// function deleteNote () {
-//   console.log("delete note")
-//   document.querySelector(".delete-button").addEventListener("click", function (event) {
-//     event.preventDefault()
-//     let deleteId = document.querySelector("#id")
-//     fetch('https://notes-api.glitch.me/api/notes/${deleteId}', {
-//       method: 'DELETE',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': basicAuthCreds()
-//       }
-//     })
-//   })
-// }
-
-// deleteNote()
