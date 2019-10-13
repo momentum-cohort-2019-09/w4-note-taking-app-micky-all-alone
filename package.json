@@ -1,9 +1,12 @@
 {
   "private": true,
   "devDependencies": {
-    "parcel-bundler": "^1.12.3"
+    "parcel-bundler": "^1.12.4"
   },
   "scripts": {
     "start": "parcel serve index.html"
+  },
+  "dependencies": {
+    "moment": "^2.24.0"
   }
 }

@@ -1,3 +1,4 @@
+
 /* globals fetch, FormData, btoa, sessionStorage */
 
 // const uuid4 = require('uuid/v4')
@@ -43,26 +44,27 @@ function runNotesApp() {
       const text = note.text
       const id = note._id
       const updated = note.updated
+      const dateTime = new Date(note.updated)
 
       noteDiv.innerHTML +=
         `
-              <div class='note-container' id=${id}>
-                <div class='title'>
-                  <h1 class='note-title'>
-                    ${title}
-                  </h1>
-                </div>
-                <div class='text'>
-                  <p>
-                    ${text}
-                  </p>
-                </div>
-                <div class='buttons'>
-                  <button type='edit' class='edit-button'>Edit</button>
-                  <button type='delete' class='delete-button'>Delete</button>
-                </div>
-              </div>
-            `
+          <div class='note-container' id=${id}>
+            <div class='title'>
+              <h1 class='note-title'>
+                ${title}
+              </h1>
+            </div>
+            <div class='text'>
+              <p>
+                ${text}
+              </p>
+            </div>
+            <div class='buttons'>
+              <button type='edit' class='edit-button'>Edit</button>
+              <button type='delete' class='delete-button'>Delete</button>
+            </div>
+          </div>
+        `
     }
     deleteNote()
     editNote()
@@ -94,6 +96,7 @@ function runNotesApp() {
   function deleteNote() {
     for (let note of notesArray) {
       const id = note._id
+      const updated = note.updated
       const noteId = document.getElementById(`${id}`)
       noteId.querySelector('.delete-button').addEventListener('click', function (event) {
         event.preventDefault()
@@ -115,6 +118,7 @@ function runNotesApp() {
   function editNote() {
     for (let note of notesArray) {
       const id = note._id
+      const updated = note.updated
       const noteId = document.getElementById(`${id}`)
       noteId.querySelector('.edit-button').addEventListener('click', function (event) {
         event.preventDefault()
