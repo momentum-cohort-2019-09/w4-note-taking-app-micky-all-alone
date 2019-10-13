@@ -57,8 +57,10 @@ function runNotesApp() {
                     ${text}
                   </p>
                 </div>
-                <button type='edit' class='edit-button'>Edit</button>
-                <button type='delete' class='delete-button'>Delete</button>
+                <div class='buttons'>
+                  <button type='edit' class='edit-button'>Edit</button>
+                  <button type='delete' class='delete-button'>Delete</button>
+                </div>
               </div>
             `
     }
@@ -120,14 +122,16 @@ function runNotesApp() {
           `
           <div class='note-form-edit' id=${id}>
             <form class='note-edit'>
-                <input class='title-edit' type='text'>
-                <input class='text-edit' type='text'>
-                <button type='submit' class='edit-button'>Edit it.</button>
+                <input class='title-edit' type='text' placeholder='Title'>
+                <input class='text-edit' type='text' placeholder='text'>
+                <div class='buttons-edit'>
+                  <button class='edit-conf-button' type='submit'>Edit it.</button>
+                </div>
             </form>
           </div>
         `
         function replaceNoteData() {
-          document.querySelector('.edit-button').addEventListener('click', function (event) {
+          document.querySelector('.edit-conf-button').addEventListener('click', function (event) {
             event.preventDefault()
             let titleUpdate = document.querySelector('.title-edit').value
             let textUpdate = document.querySelector('.text-edit').value
@@ -143,7 +147,7 @@ function runNotesApp() {
               .then(function (JSONresponse) {
                 notesArray.push(JSONresponse)
               })
-              .then(function(){
+              .then(function () {
                 retrieveNotes()
                 renderNotes()
               })
